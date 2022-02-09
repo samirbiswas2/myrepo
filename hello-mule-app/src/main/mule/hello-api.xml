@@ -10,13 +10,14 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	</http:listener-config>
 	<flow name="hello-apiFlow" doc:id="2ed68cc2-25bc-41f2-8436-71b7d5f8d35c" >
 		<http:listener doc:name="Listener" doc:id="0965ad43-713c-45e3-9296-e5476a9e1fdf" config-ref="HTTP_Listener_config" path="/test"/>
+		<set-variable value='#["Samir"]' doc:name="Set Variable" doc:id="328eac88-d410-42f1-9328-56d10eb675b6" variableName="name"/>
 		<ee:transform doc:name="Transform Message" doc:id="2ebb5870-c1e9-4516-b422-c0f4fcd30910" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
 {
-	"message" : "hello mule world!!!!!" 
+	"message" : vars.name ++ " " ++"hello mule world!!!!!"  
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
